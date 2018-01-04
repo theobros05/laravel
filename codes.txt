@@ -1,0 +1,25 @@
+print_r($request->all());exit();
+
+print_r(mysql_fetch_assoc($userQuery));
+
+
+$userid = Session::get('userNo');
+		$data = Session::all();
+		print_r($data);
+		exit();
+
+
+->tosql();
+		     dd($queryusedbook);
+
+
+$queryusedbook = DB::TABLE(DB::raw("(SELECT attendBookId,bk.bookName,l.levelName,lvl.colorCode,maxClassDate FROM (SELECT CASE WHEN tcs.attendedBookId is Null OR tcs.attendedBookId = '' THEN tcs.bookId ELSE tcs.attendedBookId END AS attendBookId,MAX(tcs.classDate) As maxClassDate FROM jptrainingdb.t_class_schedule tcs WHERE tcs.schoolId='00001' AND tcs.branchId='00001' AND tcs.classDate <= '2017-12-20' AND tcs.reportFlg = 1 AND tcs.delFlg = 0 AND tcs.attendedStudentList LIKE '%0000000001%' GROUP BY attendBookId ORDER BY maxClassDate DESC) TBL LEFT JOIN classScheduleDB.m_books bk ON bk.bookId = TBL.attendBookId LEFT JOIN classScheduleDB.m_levelsetting lvl ON lvl.id = bk.levelId WHERE bk.bookName != '' ORDER BY maxClassDate DESC,lvl.orderId DESC,bk.bookName ASC) AS tbl"))->GET();
+		     
+		   return $queryusedbook;
+wrapper class
+
+ public function getInfo($eventName)
+    {
+        if (null === $this->stub) {
+            $this->stub = self::$hasClassStub ? new ClassStub($this->pretty.'()', $this->listener) : $this->pretty.'()';
+        }

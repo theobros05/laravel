@@ -1,0 +1,9 @@
+http://laravel-recipes.com/recipes/248/knowing-all-the-blade-template-commands
+
+php artisan --version    --------------------------------------to check version
+
+php artisan make:controller controllernameController   --------make controller
+
+php artisan make: model model name  ---------------------------make model
+
+php artisan cache:clear     ----------------------------------cache clear

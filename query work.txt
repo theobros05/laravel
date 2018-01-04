@@ -1,0 +1,3 @@
+SELECT attendBookId, bk.bookName, lvl.levelName,lvl.colorCode, maxClassDate FROM (SELECT CASE WHEN tcs.attendedBookId is Null OR tcs.attendedBookId = '' THEN tcs.bookId ELSE tcs.attendedBookId END AS attendBookId, MAX(tcs.classDate) As maxClassDate FROM jptrainingdb.t_class_schedule tcs WHERE tcs.schoolId='00001' AND tcs.branchId='00001' AND tcs.classDate <= '2017-12-21' AND tcs.reportFlg = 1 AND tcs.delFlg = 0 AND tcs.attendedStudentList LIKE '%0000000001%' GROUP BY attendBookId ORDER BY maxClassDate DESC) TBL LEFT JOIN classscheduledb.m_books bk ON bk.bookId = TBL.attendBookId LEFT JOIN classscheduledb.m_levelsetting lvl ON lvl.id = bk.levelId WHERE bk.bookName != '' ORDER BY maxClassDate DESC,lvl.orderId DESC,bk.bookName ASC
+
+

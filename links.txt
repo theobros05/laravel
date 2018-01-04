@@ -1,0 +1,4 @@
+http://laravel-recipes.com/recipes/248/knowing-all-the-blade-template-commands
+
+
+php artisan make:controller controllernameController

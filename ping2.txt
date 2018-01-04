@@ -1,0 +1,42 @@
+function isSiteAvailable($url)
+{
+//check, if a valid url is provided
+if(!filter_var($url, FILTER_VALIDATE_URL))
+{
+return 'URL provided wasn't valid';
+}
+
+//make the connection with curl
+$cl = curl_init($url);
+curl_setopt($cl,CURLOPT_CONNECTTIMEOUT,10);
+curl_setopt($cl,CURLOPT_HEADER,true);
+curl_setopt($cl,CURLOPT_NOBODY,true);
+curl_setopt($cl,CURLOPT_RETURNTRANSFER,true);
+
+//get response
+$response = curl_exec($cl);
+
+curl_close($cl);
+
+if ($response) return 'Site seems to be up and running!';
+
+return 'Oops nothing found, the site is either offline or the domain doesn't exist';
+}
+
+// check if site exists / is up
+if($_GET['url']){
+
+$response = isSiteAvailable($_GET['url']);
+$message = '<div class="response">'.$response.'</div>';
+}
+
+
+
+function check_internet_connection($sCheckHost = 'www.google.com') 
+{
+    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
+
+}
+$bIsConnected = check_internet_connection();
+$sText = ($bIsConnected) ? 'You are connected to the Internet.' : 'You are not connected to the Internet.';
+echo $sText;

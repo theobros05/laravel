@@ -1,0 +1,13 @@
+
+php artisan --version
+
+C:\xampp\htdocs\samplelaravel>php artisan serve --port=8080
+
+Laravel development server started on http://localhost:8080/
+
+To create a model
+php artisan make:model Car --migration
+
+C:\xampp\htdocs\samplelaravel>php artisan make:model Car --migration
+Model created successfully.
+Created Migration: 2017_12_05_053516_create_cars_table

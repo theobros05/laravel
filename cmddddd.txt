@@ -1,0 +1,16 @@
+http://192.168.1.31/SkypeClass/
+
+
+return view('lessons.finalresult',['request' => $request,
+											'finalDateTime' => $finalDateTime,
+											'divisionName' => $divisionName,
+											'titleName' => $titleName,
+											'totalMarks' => $totalMarks,
+											'fontColorForAnswer' => $fontColorForAnswer,
+											'totalMarksObtained' => $totalMarksObtained,
+											'totaltimeforexam' => $totaltimeforexam,
+											'getActualTypedAns' => $getActualTypedAns]);
+
+
+return view('question.index',compact('questionDetail','bookdetails','bookid','lessonId','divisionId','useFilter',
+											 'lessonsarray','bookViewDivision','viewCount','request'));

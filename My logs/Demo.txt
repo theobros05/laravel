@@ -1,0 +1,19 @@
+admin panel demo screen
+
+https://envato.jattframework.com/symbiotic/10/admin/user/login.html
+
+Username : support@hayer.me
+
+Password : admin
+
+
+
+Customer panel demo screen
+
+https://envato.jattframework.com/symbiotic/10/store/user/login.php
+
+
+Demo Cart
+
+https://envato.jattframework.com/symbiotic/10/
+

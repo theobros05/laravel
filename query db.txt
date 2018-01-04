@@ -1,0 +1,2 @@
+UPDATE m_question SET bookId = "B0008" WHERE bookId = "B0043"
+UPDATE m_kanji SET bookId = "B0008" WHERE bookId = "B0043"

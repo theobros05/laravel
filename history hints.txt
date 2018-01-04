@@ -1,0 +1,48 @@
+<div class="tal mt5 ml10 mb10">
+						<span class="CMN_color_red">?</span>
+						<?php echo $correct_msg_lbl;?>
+					</div>
+					<div class="mt5">
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#008800;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								<?php echo $correctanswer_lbl; ?>
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#FF0000;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								<?php echo $wrongAnswer_lbl; ?>
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#FFA500;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								<?php echo $makeCorrect_lbl; ?>
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#9932CC;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								<?php echo $possibility_lbl; ?>
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#0000FF;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								<?php echo $skipped_lbl; ?>
+							</div>
+						</div>
+						<!-- <div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#800000;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								<?php //echo $requestWait_lbl; ?>
+							</div>
+						</div> -->
+					</div>

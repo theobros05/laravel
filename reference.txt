@@ -1,0 +1,88 @@
+$ip_address = 'www.google.com'; // IP address you'd like to ping.
+exec("ping -c 1 " . $ip_address . " | head -n 2 | tail -n 1 | awk '{print $7}'", $ping_time);
+print $ping_time[0]; // First item in array, since exec returns an array.
+print_r($ping_time);
+------------------------------------------working
+
+<?php
+/**
+ * PHP/cURL function to check a web site status. If HTTP status is not 200 or 302, or
+ * the requests takes longer than 10 seconds, the website is unreachable.
+ * 
+ * Follow me on Twitter: @HertogJanR
+ *
+ * @param string $url URL that must be checked
+ */
+function url_test( $url ) {
+  $timeout = 10;
+  $ch = curl_init();
+  curl_setopt ( $ch, CURLOPT_URL, $url );
+  curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+  curl_setopt ( $ch, CURLOPT_TIMEOUT, $timeout );
+  $http_respond = curl_exec($ch);
+  $http_respond = trim( strip_tags( $http_respond ) );
+  $http_code = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+  if ( ( $http_code == "200" ) || ( $http_code == "302" ) ) {
+    return true;
+  } else {
+    // return $http_code;, possible too
+    echo $http_code ."http code";
+    return false;
+  }
+  curl_close( $ch );
+}
+ 
+$website = "www.google.com";
+if( !url_test( $website ) ) {
+  echo $website ." is down!";
+}
+else { 
+	echo $website ." functions correctly."; }
+
+
+?>
+
+----------------------------------------------------
+
+$.ajax({
+                type: 'POST',
+                url: 'app.blade.php',
+                success: function(data) {
+                    alert(data);
+                    $("p").text(data);
+
+                }
+            });
+
+
+------------------------------------------------------------------
+<?php
+/**
+ * PHP/cURL function to check a web site status. If HTTP status is not 200 or 302, or
+ * the requests takes longer than 10 seconds, the website is unreachable.
+ * 
+ * Follow me on Twitter: @HertogJanR
+ *
+ * @param string $url URL that must be checked
+ */
+function url_test( $url ) {
+  $timeout = 10;
+  $ch = curl_init();
+  curl_setopt ( $ch, CURLOPT_URL, $url );
+  curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+  curl_setopt ( $ch, CURLOPT_TIMEOUT, $timeout );
+  $http_respond = curl_exec($ch);
+  $http_respond = trim( strip_tags( $http_respond ) );
+  $http_code = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+  if ( ( $http_code == "200" ) || ( $http_code == "302" ) ) {
+    echo $http_code;
+  } else {
+    echo $http_code;
+  }
+  curl_close( $ch );
+}
+ 
+$website = "www.google.com";
+url_test( $website);
+
+?>

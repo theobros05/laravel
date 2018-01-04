@@ -1,0 +1,41 @@
+Origin was changed. Please run this command in SAJALA checkout
+git remote set-url origin ssh://gitadmin@192.168.1.35/home/gitadmin/repo/sajala.git
+
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (master)
+$ git pull
+gitadmin@192.168.1.9's password:Admin123
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (master)
+$ git checkout -b theo06122017
+Switched to a new branch 'theo20171206'   -------------now the new clone is added to the new 
+
+branch
+
+
+git status - to look unstaged changes.
+
+git branch - number of branches.
+
+git checkout -b theo06122017 ---------------------------------- create new branch
+
+git branch -d theo06122017 ------------------------------------- delete branch
+
+git add . -------------------------------------------------------to add all the files
+
+git add filename ------------------------------------------------to add single file
+
+
+git commit -m 'message' -----------------------------------------to commit to git
+
+
+git push origin branch name -------------------------------------to push files to github
+
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git checkout master--------------------------------------------check out to master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+
+
+

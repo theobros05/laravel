@@ -1,0 +1,18 @@
+<?php 
+
+$result_array = array();
+while ($row = mysql_fetch_assoc($products)) {
+    $product[] = $row['name'];
+    $price[] = $row['price'];
+    $image[] = $row['image'];
+
+}
+ print_r($product);
+ print_r($price);
+ print_r($image);
+
+  
+//   while ($data[]=mysql_fetch_array($products)) { 
+// print_r($data);
+
+    ?>

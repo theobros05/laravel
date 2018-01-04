@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+{{ HTML::style('css/bootstrap.min.css') }}
+{{ HTML::script('js/jquery.min.js') }}
+{{ HTML::script('js/register.js') }}
+
+<html>
+<head>
+    <title>Registration</title>
+   
+   </head>
+   <script type="text/javascript">
+     $(document).ready(function () {
+    $('#addform').validate({ // initialize the plugin
+        rules: {
+            firstName: {
+                required: true
+            },
+            password: {
+                required: true,
+                email: true
+            },
+            contact: {
+                required: true
+            },
+            address: {
+                required: true
+            }
+        }
+    });
+});
+   </script>
+   
+    <body>
+<div class="container">
+  <h1>Registration</h1>
+  {{ Form::open(array('name'=>'addform', 'id'=>'addform', 
+                'class' => 'form-horizontal',
+                'files'=>true,
+                'url' => 'register', 
+                'method' => 'POST')) }}
+          {{ csrf_field() }}
+
+               
+    <table id="example" class="table table-striped table-bordered" >
+      <!-- style="width: 700px"   -->
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{ Form::text('firstName', null, array('id'=>'fname', 
+                'name' => 'firstName','class'=>'form-control fname')) }}<span id='spanLengthValidation'></span></td>
+                
+
+      </tr>
+
+      <tr>
+        <td>Password</td>
+        <td>{{ Form::password('password', array('id'=>'pass', 
+                'name' => 'password','class'=>'form-control')) }}<span id='spanLengthValidation'></span></td>
+
+     </tr>
+         
+       
+      <tr>
+        <td>Gender</td>
+        <td>{{ Form::radio('gender', '1', false, array('id' =>'male',
+                                'name' => 'gender',
+                                'class' => 'gender')) }}<label>Male</label>
+        {{ Form::radio('gender', '2', false, array('id' =>'female',
+                                'name' => 'gender',
+                                'class' => 'gender')) }}
+        <label>Female</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Job Type</td>
+        <td>{{ Form::select('jobType', ['Student', 'Employee', 'Trainee']) }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Address</td>
+        <td>{{ Form::textarea('address', null, array('id'=>'address', 
+                'name' => 'address','class'=>'form-control address ','size' => '30x4')) }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Contact</td>
+        <td>{{ Form::text('contact', null, array('id'=>'contact', 
+                'name' => 'contact','class'=>'form-control')) }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Payment</td>
+        <td>{{Form::checkbox('credit', '1') }}<h5>credit</h5>
+            {{Form::checkbox('cash', '2')   }}<h5>cash</h5>
+            
+
+      </td>
+
+      <tr>
+        <td>Upload file</td>
+        <td>{!! Form::file('image', null) !!}
+        </td>
+      </tr>
+      </tr>
+      
+    </tbody>
+       
+       </table>
+
+      <button type="submit" class='btn btn-danger '>Register</button>
+      <button type="Reset" class='btn btn-success addbtn'>Reset</button>
+  {!! Form::close() !!}
+</div>
+
+</body>
+</html>

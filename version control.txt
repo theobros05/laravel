@@ -1,0 +1,43 @@
+versions
+
+PHP
+
+C:\xampp\htdocs\slaravel>php -v
+PHP 7.0.25 (cli) (built: Oct 24 2017 14:10:14) ( ZTS )
+Copyright (c) 1997-2017 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
+
+html
+
+css
+
+Apache
+
+Mysql
+
+Navigate
+Help->About->9.1.8
+
+
+Sublime
+Help->About Sublime Text->3.0
+
+
+Laravel
+C:\xampp\htdocs\slaravel>php artisan --version
+Laravel Framework 5.5.24
+
+Vargent->$ vagrant -v
+Vagrant 1.9.7
+
+Virtal Box
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ vagrant box list
+laravel/homestead (virtualbox, 5.0.1)
+
+
+https://192.168.1.15:8443/svn/ecjapanese
+
+
+
+

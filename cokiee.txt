@@ -1,0 +1,72 @@
+setcookie("cookieuser", $auser, $hour);
+setcookie("cookiepassword", $bpass, $hour); /// php set cookie
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $cookie = cookie($name = 'tiger', $value = 'hen', $minutes = 50, $path = null, $domain = null, $secure = false, $httpOnly = true);
+// echo  $request->cookie('tiger');
+
+
+$auser=Input::get('email');
+      $bpass=Input::get('password');
+
+     
+     setcookie("TestCooker", $auser, time()+3600);  /* expire in 1 hour */
+     
+       // set the remember me cookie if the user check the box
+       $remember = (Input::has('remember')) ? true : false;
+       
+                   if($remember == 1)
+                    {
+                    $hour = time() + 3600 * 24 * 30;
+                      Cookie::make('name', $auser, 360);
+                    }
+
+                    $val = Cookie::get('TestCookie');
+                     print_r($val);
+                     exit;
+
+
+$minutes = 50;
+$cookie = cookie('tiger', 'hen', $minutes);
+response('Hello World')->cookie($cookie);
+$value = $request->cookie();
+dd($value); exit;
+$value = $request->cookie('name');
+print_r($cookie);
+$val = Cookie::get('tiger');
+print_r($value);
+echo  $request->cookie('tiger');
+
+     $name = 'cook';
+     // setcookie("TestCookie", $value, time()+3600);  /* expire in 1 hour */
+     // print_r($_COOKIE);
+       // set the remember me cookie if the user check the box
+       $remember = (Input::has('remember')) ? true : false;
+       print_r($remember);
+       $auser=Input::get('email');
+       $bpass=Input::get('password');
+       $cookie = Cookie::make($name, $auser, 60);
+       // print_r($auser);
+       // print_r($bpass);
+                  if($remember == 1)
+                    {
+                    $hour = time() + 3600 * 24 * 30;
+                      Cookie::make('name', $auser, 360);
+                    }
+
+                    $val = Cookie::get('tiger');
+                     print_r($val);
+              exit;

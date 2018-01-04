@@ -1,0 +1,69 @@
+/**
+	*
+	* Get All User Data based on request
+	* @author Theo
+	* @param  $request To get class history of student
+	* @return Object to particular view page
+	* Created At 2017/12/20
+	*
+	*/
+	public function classhistory(Request $request)
+	{
+		        
+		$language = Common::fnlanguage();
+		//Get Used Book Details
+		$userid = Session::get('userNo');
+		$getUsedBookDetails = StudentHistory::fngetUsedBookDetails($userid); 
+		$divisionCount = 0;
+		$lessonCount = 0;
+		$classCount = "-";
+		$classHrs ="-";
+		$detailHistory = array();
+		$lessonDivisionDetailsdata=array();
+		if (count($getUsedBookDetails>0)) {
+			foreach ($getUsedBookDetails as $key => $value) {
+			$getInfo = StudentHistory::fnstudentwisedata($userid,$getUsedBookDetails[$key]['attendBookId']); // get student details
+		   print_r($getInfo); 
+			$detailHistory[$key]['classCount'] = $getInfo[$key]['classCount'];
+
+			$detailHistory[$key]['totalMins'] = self::convertToHoursMins($getInfo[$key]['totalMins']);
+			$detailHistory[$key]['currentMonthUse'] = $getInfo[$key]['currentMonthUse'];
+			
+			//Get Divisions Name
+			$detailHistory[$key]['division'] = StudentHistory::fngetdivisionid($key);
+			$divisionCount = count($detailHistory[$key]['division']);
+			
+			//Get Lessons Name
+			$detailHistory[$key]['lessons'] = StudentHistory::fngetlessons($key);
+			$lessonCount = count($detailHistory[$key]['lessons']);
+			// get Lesson and Division details according to user & book
+			$lessonDivisionDetails = StudentHistory::fngetLessonDivisionDetails($key);
+		
+			
+			//Check Finished or Not Finished according to Lessons and Divisions
+					foreach ($detailHistory[$key]['lessons'] as $lKey => $lvalue) {
+						foreach ($detailHistory[$key]['division'] as $dKey => $dvalue) {
+							if(isset($lessonDivisionDetails[$lKey][$dKey]) && $lessonDivisionDetails[$lKey][$dKey] == 1) {
+								$detailHistory[$key]['status'][$lKey][$dKey] = 1;
+							} else {
+								$detailHistory[$key]['status'][$lKey][$dKey] = 0;
+							}
+						}
+					}
+			
+	 		} 
+		}
+		
+		return view('StudentHistory.class',compact('getUsedBookDetails','detailHistory'));
+	}
+	public static function convertToHoursMins($time) 
+	{
+		$format = '%02d:%02d';
+	    if ($time < 1) {
+	        return;
+	    }
+	    $hours = floor($time / 60);
+	    $minutes = ($time % 60);
+	    $returnparameter = sprintf($format, $hours, $minutes);
+	    return $returnparameter;
+	}

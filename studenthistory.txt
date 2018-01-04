@@ -1,0 +1,152 @@
+/**
+	*
+	* Get All User Data based on request
+	* @author Theo
+	* @param  $request To get class history of student
+	* @return Object to class.blade.php
+	* Created At 2017/12/20
+	*
+	*/
+	public static function fngetUsedBookDetails($userid) {
+		$curDate =date('Y-m-d');
+		
+		$queryusedbook = DB::TABLE(DB::raw("(SELECT attendBookId, bk.bookName, lvl.levelName,lvl.colorCode, maxClassDate FROM (SELECT CASE WHEN tcs.attendedBookId is Null OR tcs.attendedBookId = '' THEN tcs.bookId ELSE tcs.attendedBookId END AS attendBookId, MAX(tcs.classDate) As maxClassDate FROM jptrainingdb.t_class_schedule tcs WHERE tcs.schoolId='00001' AND tcs.branchId='00001' AND tcs.classDate <= '$curDate' AND tcs.reportFlg = 1 AND tcs.delFlg = 0 AND tcs.attendedStudentList LIKE '%$userid%' GROUP BY attendBookId ORDER BY maxClassDate DESC) TBL LEFT JOIN classscheduledb.m_books bk ON bk.bookId = TBL.attendBookId LEFT JOIN classscheduledb.m_levelsetting lvl ON lvl.id = bk.levelId WHERE bk.bookName != '' ORDER BY maxClassDate DESC,lvl.orderId DESC,bk.bookName ASC) AS tbl"))->GET();
+
+		foreach ($queryusedbook as $key => $value) {
+			$UsedBookDetails[$value->attendBookId]['attendBookId'] = $value->attendBookId;
+			$UsedBookDetails[$value->attendBookId]['bookName']     = $value->bookName;
+			$UsedBookDetails[$value->attendBookId]['levelName']    = $value->levelName;
+			$UsedBookDetails[$value->attendBookId]['colorCode']    = $value->colorCode;
+			$UsedBookDetails[$value->attendBookId]['lastClassDate']= $value->maxClassDate;
+		} 
+		   return $UsedBookDetails;
+		
+	}
+	public static function fnstudentwisedata($userid,$bookId="") {
+
+		$curYear = date('Y');
+		$curMonth = date('m');
+		$condition = "";
+		$returnvalue=array();
+		if($bookId!=""){
+			$condition = " AND TBL.attendBookId = '$bookId'";
+		}
+
+		$querystudentdetails = DB::TABLE(DB::raw("(SELECT TBL.attendBookId AS bookId,TBL.attendedLevelId,TBL.senseiId,TBL.attendBookId,ROUND((TIME_TO_SEC(TBL.toTime) - TIME_TO_SEC(TBL.fromTime))/60, 0) AS mins,LEFT(TBL.classDate, 4)AS classYear,MID(TBL.classDate,6,2) AS classMonth FROM (SELECT tcs.fromTime,tcs.toTime,tcs.senseiNo AS senseiId,tcs.classDate,tcs.keyWord,CASE WHEN tcs.attendedStudentList IS NULL OR tcs.attendedStudentList = '' THEN grp.Content ELSE tcs.attendedStudentList END AS attendedStudentList,CASE WHEN tcs.attendedBookId IS NULL OR tcs.attendedBookId = '' THEN tcs.bookId ELSE tcs.attendedBookId END AS attendBookId,CASE WHEN tcs.attendedLevelId IS NULL OR tcs.attendedLevelId = '' THEN tcs.levelId ELSE tcs.attendedLevelId END AS attendedLevelId FROM jptrainingdb.t_class_schedule tcs LEFT JOIN jptrainingdb.m_grouplist grp ON tcs.keyWord = grp.Keyword WHERE tcs.schoolId='00001' AND tcs.branchId='00001' AND tcs.delflg=0 AND tcs.reportFlg!=2 AND grp.Year = LEFT(tcs.classDate,4) AND grp.Month = MID(tcs.classDate,6,2)) TBL WHERE TBL.attendBookId IS NOT NULL $condition AND TBL.attendedStudentList LIKE '%$userid%' AND TBL.attendBookId != '' ORDER BY bookId,classYear,classMonth ASC) AS tbl"))->GET();
+
+		$bookId = "";
+		foreach ($querystudentdetails as $key => $value) {
+			// BookHistory for Student
+			if($bookId != $value->bookId) {
+				$bookId = $value->bookId;
+				$bookDetails =self::fngetBookName($bookId);
+
+				$returnvalue[$bookId]['bookName'] = $bookDetails['bookName'];
+				$returnvalue[$bookId]['levelName'] = $bookDetails['levelName'];
+				$returnvalue[$bookId]['levelColor'] = $bookDetails['levelColor'];
+				$returnvalue[$bookId]['totalLessonCount'] = $bookDetails['totalLessonCount'];
+				$returnvalue[$bookId]['lessonList'] = array();
+				$returnvalue[$bookId]['totalMins'] =  $value->mins;
+				$returnvalue[$bookId]['currentMonthUse'] =  0;
+				$returnvalue[$bookId]['classCount'] =1;
+			} else {
+				$returnvalue[$bookId]['totalMins'] +=  $value->mins;
+				$returnvalue[$bookId]['classCount'] ++;
+			}
+			// check current month use
+			if($returnvalue[$bookId]['currentMonthUse'] == 0) {
+				if($curYear ==  $value->classYear && $curMonth ==  $value->classMonth) {
+					$returnvalue[$bookId]['currentMonthUse'] =  1;
+				}
+			}
+			$lessonId = $value->attendedLevelId;
+			// print_r($lessonId); exit();
+			$lessonArr = explode(" ", $lessonId);
+			// $lessonArr = split(',', $lessonId);
+			foreach ($lessonArr as $lessonKey => $lessonValue) {
+				if(!empty($lessonValue)) {
+					if (!array_key_exists($lessonValue, $returnvalue[$bookId]['lessonList'])) {
+						 $returnvalue[$bookId]['lessonList'][$lessonValue] = $lessonValue;
+					}
+				}
+			}
+			
+		}	
+		   return $returnvalue;
+		
+	}
+	public static function fngetBookName($bookId){
+
+		
+		$bookName = array();
+		if ($bookId == "others" || $bookId == "other") {
+			$bookName['bookName'] = "others";
+			$bookName['totalLessonCount'] = "";
+		} else {
+			$querygetbookname = DB::TABLE(DB::raw("(SELECT m_books.bookName, COUNT(m_booklevel.levelId) AS totalLessonCount, msl.levelName,msl.colorCode AS levelColor FROM classscheduledb.m_books m_books LEFT JOIN classscheduledb.m_booklevel ON (m_books.bookId = m_booklevel.bookId AND m_booklevel.delFlg = 0) LEFT JOIN classscheduledb.m_levelsetting msl ON m_books.levelId = msl.id WHERE m_books.bookId = '$bookId' GROUP BY m_books.bookId) AS tbl"))->GET();
+			
+				foreach ($querygetbookname as $key => $value) {
+
+					$bookName['bookName']         = $value->bookName;
+					$bookName['levelName']        = $value->levelName;
+					$bookName['levelColor']       = $value->levelColor;
+					$bookName['totalLessonCount'] = $value->totalLessonCount;
+				}
+			}
+
+		return $bookName;
+	}
+	public static function fngetdivisionid($bookId) {
+		$divisioname="";
+		$querygetdivisionid = DB::table('classscheduledb.m_books')
+						->SELECT('divisionId')
+						->WHERE('bookId',$bookId)
+						->GET();
+		$divisioname = explode(",",$querygetdivisionid);			
+		if ($divisioname != "") {
+			$querygetdivisionname = DB::table('classscheduledb.m_division_setting')
+						->SELECT('id','divisionName')
+						->WHEREIN('id',$divisioname)
+						->ORDERBY('id')
+						->GET();
+		}
+		 return $querygetdivisionname;
+		
+	}
+	public static function fngetlessons($bookId) {
+		$values = array();
+		$querygetlessons = DB::table('classscheduledb.m_booklevel')
+						->SELECT('levelId','levelName')
+						->WHERE('bookId',$bookId)
+						->WHERE('delFlg','0')
+						->ORDERBY('orderId')
+						->GET();
+		return $querygetlessons;
+
+	}
+	public static function fngetLessonDivisionDetails($key) {
+		$userid = Session::get('userNo');
+		$curDate =date('Y-m-d');
+		$details = array();
+		$querygetLessonDivisionDetails = DB::TABLE(DB::raw("(SELECT CASE WHEN tcs.attendedBookId is Null OR tcs.attendedBookId = '' THEN tcs.bookId ELSE tcs.attendedBookId END AS attendBookId , CASE WHEN tcs.attendedLevelId is Null OR tcs.attendedLevelId = '' THEN tcs.levelId ELSE tcs.attendedLevelId END AS attendLevelId , CASE WHEN tcs.attendedDivisionId is Null OR tcs.attendedDivisionId = '' THEN tcs.divisionId ELSE tcs.attendedDivisionId END AS attendDivisionId FROM jptrainingdb.t_class_schedule tcs WHERE tcs.schoolId='00001' AND tcs.branchId='00001' AND tcs.classDate <= '$curDate' AND tcs.reportFlg != 2 AND tcs.delFlg = 0 AND tcs.attendedStudentList LIKE '%$userid%' HAVING attendBookId ='$key') AS tbl"))->GET();
+
+		foreach ($querygetLessonDivisionDetails as $key => $value) {
+
+			$lessonArr = explode(" ", $value->attendLevelId);
+			$divisionArr = explode(" ", $value->attendDivisionId);
+			
+					foreach ($lessonArr as $lessonKey => $lessonValue) {
+						if((!empty($lessonValue)) && ($value->attendDivisionId)){
+							foreach ($divisionArr as $divKey => $divValue) {
+								if(!empty($divValue)){
+									$details[$lessonValue][$divValue] = 1;
+								}
+							}
+						}
+					}
+		}
+		     
+        return $details;
+		
+	}
+}

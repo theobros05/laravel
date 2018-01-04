@@ -1,0 +1,149 @@
+SHOW DATABASES;
+CREATE TABLE CUSTOMERS(
+   ID   INT              NOT NULL,
+   NAME VARCHAR (20)     NOT NULL,
+   AGE  INT              NOT NULL,
+   ADDRESS  CHAR (25)    UNIQUE ,
+   SALARY   DECIMAL (18, 2),       
+   PRIMARY KEY (ID)
+);
+
+CREATE TABLE CUSTOMERS(
+   ID   INT              NOT NULL,
+   NAME VARCHAR (20)     NOT NULL,
+   AGE  INT              NOT NULL CHECK (AGE >= 18),
+   ADDRESS  CHAR (25) ,
+   SALARY   DECIMAL (18, 2) DEFAULT 5000.00,       
+   PRIMARY KEY (ID)
+);
+
+Foreign key references
+
+CREATE TABLE ORDERS (
+   ID          INT        NOT NULL,
+   DATE        DATETIME, 
+   CUSTOMER_ID INT references CUSTOMERS(ID),
+   AMOUNT     double,
+   PRIMARY KEY (ID)
+);
+
+
+DESC CUSTOMERS;
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (2, 'Lion', 32, 'US', 3000.00 );
+
+SELECT ID, NAME, SALARY 
+FROM CUSTOMERS
+WHERE SALARY > 3000;
+
+SELECT ID, NAME, SALARY 
+FROM CUSTOMERS
+WHERE SALARY > 2000 AND age < 30;
+
+SELECT ID, NAME, SALARY 
+FROM CUSTOMERS
+WHERE SALARY > 2000 OR age < 25;
+
+SELECT ID, NAME, SALARY 
+FROM CUSTOMERS
+WHERE SALARY > 2000 OR age < 25;
+
+DELETE FROM CUSTOMERS
+WHERE ID = 5;
+
+DELETE FROM CUSTOMERS;
+
+SELECT * FROM CUSTOMERS
+WHERE SALARY LIKE '200%';
+
+SELECT * FROM CUSTOMERS
+LIMIT 3;
+
+SELECT * FROM CUSTOMERS
+WHERE ID <= 2;
+
+SELECT * FROM CUSTOMERS
+   ORDER BY NAME ASC;
+-----------------------------------------------------------------------SUM GROUP BY
+SELECT NAME, SUM(SALARY) FROM CUSTOMERS
+   GROUP BY NAME;
+-----------------------------------------------------------------------ALTER ORDER BY ASC DESC
+
+ALTER TABLE CUSTOMERS CHANGE `ID` `IDD` VARCHAR(255);
+ALTER TABLE CUSTOMERS CHANGE `IDD` `ID` INT(2);
+-----------------------------------------------------------------------DISTINCT
+SELECT DISTINCT SALARY FROM CUSTOMERS
+   ORDER BY SALARY DESC;
+
+SELECT * FROM CUSTOMERS
+   ORDER BY (CASE ADDRESS
+   WHEN 'UK' 	 THEN 1
+   WHEN 'US' 	 THEN 2
+   WHEN 'KL' 	 THEN 3
+   WHEN 'UAE' THEN 4
+   WHEN 'AUS' 	THEN 5
+   ELSE 100 END) ASC, ADDRESS DESC;
+
+-------------------------------------------------------------------------AND OR NOT
+
+SELECT * FROM CUSTOMERS
+WHERE ADDRESS='UK' AND NAME='leo';
+
+SELECT * FROM CUSTOMERS
+WHERE ADDRESS='UK' OR NAME='Lion';
+
+SELECT * FROM CUSTOMERS
+WHERE ADDRESS='UK' AND NOT NAME='lion';
+
+SELECT * FROM CUSTOMERS
+WHERE ADDRESS='UP' AND (NAME='lion' OR AGE =22 );
+
+SELECT * FROM CUSTOMERS
+WHERE ID BETWEEN 2 AND 3;
+-------------------------------------------------------------------------SUB QUERY, EXISTS
+SELECT AGE FROM CUSTOMERS
+WHERE EXISTS(SELECT ADDRESS FROM CUSTOMERS);
+--------------------------------------------------------------------------IN
+SELECT * FROM CUSTOMERS WHERE ADDRESS IN ('Germany', 'US', 'UK');
+--------------------------------------------------------------------------COUNT
+SELECT COUNT(*) FROM CUSTOMERS
+
+SELECT COUNT(AGE) FROM CUSTOMERS
+
+--------------------------------------------------------------------------AVERAGE
+
+SELECT AVG(SALARY) FROM CUSTOMERS;
+
+--------------------------------------------------------------------------SUM
+
+SELECT SUM(SALARY) FROM CUSTOMERS;
+--------------------------------------------------------------------------MIN
+
+SELECT MIN(SALARY) FROM CUSTOMERS;
+
+--------------------------------------------------------------------------MAX
+
+SELECT MAX(SALARY) FROM CUSTOMERS;
+
+--------------------------------------------------------------------------HAVING
+
+SELECT COUNT(ID),AGE FROM CUSTOMERS GROUP BY AGE HAVING COUNT(ID)>1;
+
+--------------------------------------------------------------------------ALIAS
+
+SELECT SALARY AS INCOME FROM CUSTOMERS
+
+--------------------------------------------------------------------------JOIN
+
+SELECT ID, NAME, AGE, AMOUNT FROM CUSTOMERS, ORDERS
+WHERE  CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+--------------------------------------------------------------------------INNER JOIN
+SELECT ID, NAME, AGE, AMOUNT FROM CUSTOMERS INNER JOIN ORDERS
+WHERE  CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+

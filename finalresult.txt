@@ -1,0 +1,235 @@
+@extends('layouts.app')
+@section('content')
+{{ HTML::script('js/lessons.js') }}
+{{ HTML::script('js/home.js') }}
+
+
+
+<script type="text/javascript">
+    var datetime = '@php echo date("Ymdhis") @endphp';
+</script>
+<style type="text/css">
+
+
+
+
+</style>
+<div class="container m-w">
+	<div class="heading hline">
+		<img class="headimg  pull-left mt12 mr5" src="{{ URL::asset('images/practiceicon.png')  }}">
+		<span class="fntweight">{{ trans('messages.lbl_test_history') }} > {{ trans('messages.lbl_result') }}</span>
+	</div>	
+				{{ Form::open(array('name'=>'overallresultfrm', 'id'=>'overallresultfrm', 
+										'class' => 'form-horizontal',
+										'files'=>true,
+										'method' => 'POST')) }}
+					{{ csrf_field() }}
+				<div class="col-xs-12 mb10 pm0 mt8">
+					<div>
+						<a href="javascript:fnDefaultBack();" class="btn btn-primary pull-left">{{ trans('messages.lbl_back') }}</a>
+					</div>
+				</div>
+				<fieldset class="pm0">
+					<div class="col-xs-12 mt5 pm0">
+						<div class="col-xs-6 inb">
+							<div class="inb">
+								<label>{{ trans('messages.lbl_name') }} :
+								</label>
+							</div>
+							<div class="inb">
+								<label>{{ Auth::user()->firstName }}
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="inb pull-right">
+								<label class="pull-right">{{ $titleName }}
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 mt5 pm0">
+						<div class="col-xs-6 inb">
+							<div class="inb">
+								<label>{{ trans('messages.lbl_bookname') }} :
+								</label>
+							</div>
+							<div class="inb">
+								<label>{{ (isset($getActualTypedAns[0]->bookName)?$getActualTypedAns[0]->bookName:"") }}
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6 pull-right pm0">
+							<div class="col-xs-3 inb pull-right pm0">
+								<label class="pm0 mr15 pull-right">{{ trans('messages.lbl_type') }} : <span class="fr">Hard</span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 mt5 pm0">
+						<div class="col-xs-6 inb">
+							<div class="inb">
+								<label>{{ trans('messages.lbl_time_taken') }} :
+								</label>
+							</div>
+							<div class="inb">
+								<label>{{ $totaltimeforexam }}
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6 pm0">
+							<input type="checkbox" class="number" value="One">
+							<button type="submit" class='btn btn-primary  '>Send Request</button>
+							<div class="col-xs-3 inb pull-right pm0">
+								<label class="pull-right pm0 mr15">{{ trans('messages.lbl_score') }} : {{$totalMarksObtained}}/{{$totalMarks}}
+								</label>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<div>
+					<table class="table table-striped table-bordered mt10">
+							<thead class="CMN_tbltheadcolor">
+								<colgroup>
+									<col width="1%">
+									<col width="3%">
+									<col width="11%">
+									<col width="11%">
+									<col width="11%">
+								</colgroup>
+								<tr class="CMN_tbltheadcolor">
+									<th class="vam tac fbold">{{ trans('messages.lbl_sno') }}</th>
+									<th class="vam tac fbold">{{ trans('messages.lbl_date_time') }}</th>
+									<th class="vam tac fbold">{{ $divisionName }}</th>
+									<!-- Need to enable it for Admin and Super Admin -->
+								@if($request->divisionId==1)
+									<th class="vam tac fbold">{{ trans('messages.lbl_actual_answer') }}</th>
+								@endif
+									<th class="vam tac fbold">{{ trans('messages.lbl_given_answer') }}</th>
+								</tr>
+							</thead>
+							<tbody class="tablealternate">
+								@forelse($getActualTypedAns as $key => $value)
+									<tr>
+										<td class="tac vam">{{ $key+1 }}</td>
+										<td class="tac vam">{{ $finalDateTime[$key] }}
+											                [{{  $value->timeTake }}]</td>
+									@if($request->divisionId!=1)
+										<td>{!! nl2br(e($value->quesText)) !!}</td>
+										<!-- Need to enable it for Admin and Super Admin -->
+										<!-- <td>{!! nl2br(e($value->answer1)) !!}</td> -->
+										@if($value->typeAnswer1 == "" && $value->skipFlg == 1)
+										<td <?php echo $fontColorForAnswer[$key]; ?>>
+											Skipped
+										</td>
+										@else
+										<td <?php echo $fontColorForAnswer[$key]; ?>>
+											{!! nl2br(e($value->typeAnswer1)) !!}
+										</td>
+										@endif
+									@else
+										@if($request->partIdentyFlg == 0)
+										<td>{!! nl2br(e($value->kanji)) !!}</td>
+										<td>{!! nl2br(e($value->reading)) !!}</td>
+										@elseif($request->partIdentyFlg == 2)
+										<td>{!! nl2br(e($value->meaning)) !!}</td>
+										<td>{!! nl2br(e($value->kanji)) !!}</td>
+										@endif
+										@if($value->typeAnswer == "" && $value->skipFlg == 1)
+										<td <?php echo $fontColorForAnswer[$key]; ?>>
+											Skipped
+										</td>
+										@else
+										<td <?php echo $fontColorForAnswer[$key]; ?>>
+											{!! nl2br(e($value->typeAnswer)) !!}
+											{{ Form::checkbox('categories[]',1,false) }}
+											{{ Form::checkbox('chkbox', 'value',false, ['onClick' => 'alert(123)']) }}
+											 {{ Form::checkbox('remember', 1, null, ['id'=>'remember', 'class' => 'className']) }}
+
+											</td>
+										@endif
+									@endif
+									</tr>
+								@empty
+									<tr>
+										@if($request->divisionId!=1)
+											<td class="text-center" colspan="4" class="fr">
+										@else
+											<td class="text-center" colspan="5" class="fr">
+										@endif
+										No Data Found</td>
+									</tr>
+								@endforelse
+							</tbody>
+					</table>
+				</div>
+				<div>
+					<div class="tal mt5 ml10 mb10">
+						<span class="fr">?</span>
+						{{ trans('messages.lbl_hint') }}
+					</div>
+					<div class="mt5">
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#008800;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								{{ trans('messages.lbl_correct_answer') }}
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#FF0000;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								{{ trans('messages.lbl_wrong_answer') }}
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#FFA500;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								{{ trans('messages.lbl_make_corrected') }}
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#9932CC;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								{{ trans('messages.lbl_possibility') }}
+							</div>
+						</div>
+						<div class="inb tal fll ml10">
+							<div class="CMN_div_inblock vam fll" style="background-color:#0000FF;height:15px;width:15px;">
+							</div>
+							<div class="ml10 inb tal">
+								{{ trans('messages.lbl_skipped') }}
+							</div>
+						</div>
+				</div>
+				</div>
+				{{ Form::close() }}
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<a href="#" class="scrollToTop pull-right">
+			<i class="scroll fa fa-angle-double-up" aria-hidden="true"></i><br>
+		</a>
+	</div>
+
+</div>
+</div>
+@endsection
+<script type="text/javascript">
+$(document).ready(function () {
+    //Disable cut copy paste
+    $('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+   
+    //Disable mouse right click
+    $("body").on("contextmenu",function(e){
+        return false;
+    });
+});
+</script>

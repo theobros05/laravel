@@ -1,0 +1,4 @@
+Collective\Html\HtmlServiceProvider:class,
+
+
+'Form' => Collective\Html\FormFacade::class,

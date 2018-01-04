@@ -1,0 +1,3 @@
+{{ Form::checkbox('categories[]',1,false) }}
+{{ Form::checkbox('chkbox', 'value',false, ['onClick' => 'alert(123)']) }}
+{{ Form::checkbox('remember', 1, null, ['id'=>'remember', 'class' => 'className']) }}

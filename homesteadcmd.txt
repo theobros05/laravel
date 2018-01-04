@@ -1,0 +1,278 @@
+﻿
+sslap81@SSLAP0081 MINGW64 /c/Users
+$ vagrant box add laravel/homestead
+==> box: Loading metadata for box 'laravel/homestead'
+    box: URL: https://vagrantcloud.com/laravel/homestead
+This box can work with multiple providers! The providers that it
+can work with are listed below. Please review the list and choose
+the provider you will be working with.
+
+1) hyperv
+2) parallels
+3) virtualbox
+4) vmware_desktop
+
+Enter your choice: 3
+==> box: Adding box 'laravel/homestead' (v5.0.1) for provider: virtualbox
+    box: Downloading: https://vagrantcloud.com/laravel/boxes/homestead/versions/
+5.0.1/providers/virtualbox.box
+    box: Progress: 100% (Rate: 307k/s, Estimated time remaining: --:--:--)
+==> box: Successfully added box 'laravel/homestead' (v5.0.1) for 'virtualbox'!
+
+sslap81@SSLAP0081 MINGW64 /c/Users
+$ cd homestead
+bash: cd: homestead: No such file or directory
+
+sslap81@SSLAP0081 MINGW64 /c/Users
+$ cd..
+bash: cd..: command not found
+
+sslap81@SSLAP0081 MINGW64 /c/Users
+$ cd .
+
+sslap81@SSLAP0081 MINGW64 /c/Users
+$ cd
+
+sslap81@SSLAP0081 MINGW64 ~
+$ vagrant box add laravel/homestead
+==> box: Loading metadata for box 'laravel/homestead'
+    box: URL: https://vagrantcloud.com/laravel/homestead
+This box can work with multiple providers! The providers that it
+can work with are listed below. Please review the list and choose
+the provider you will be working with.
+
+1) hyperv
+2) parallels
+3) virtualbox
+4) vmware_desktop
+
+Enter your choice: 3
+==> box: Adding box 'laravel/homestead' (v5.0.1) for provider: virtualbox
+The box you're attempting to add already exists. Remove it before
+adding it again or add it with the `--force` flag.
+
+Name: laravel/homestead
+Provider: virtualbox
+Version: 5.0.1
+
+sslap81@SSLAP0081 MINGW64 ~
+$ git clone https://github.com/laravel/homestead.git Homestead
+Cloning into 'Homestead'...
+remote: Counting objects: 2688, done.
+remote: Total 2688 (delta 0), reused 0 (delta 0), pack-reused 2688
+Receiving objects: 100% (2688/2688), 506.13 KiB | 193.00 KiB/s, done.
+Resolving deltas: 100% (1591/1591), done.
+
+sslap81@SSLAP0081 MINGW64 ~
+$ cd Homestead
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead (master)
+$ git checkout v6.1.0
+Note: checking out 'v6.1.0'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at 9bb1241... 💎 🔖 Tagging 6.1.0
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ init.bat
+bash: init.bat: command not found
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ bash init.sh
+Homestead initialized!
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ vagrant up
+Check your Homestead.yaml file, the path to your private key does not exist.
+Check your Homestead.yaml file, the path to your private key does not exist.
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ cd .ssh
+bash: cd: .ssh: No such file or directory
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ mkdir .ssh
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ cd .ssh
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead/.ssh ((v6.1.0))
+$ cd ..
+
+sslap81@SSLAP0081 MINGW64 ~/Homestead ((v6.1.0))
+$ cd ..
+
+sslap81@SSLAP0081 MINGW64 ~
+$ cd .ssh
+
+sslap81@SSLAP0081 MINGW64 ~/.ssh
+$ ssh-keygen -t rsa -C petchimuthu100@mail.com
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/sslap81/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/sslap81/.ssh/id_rsa.
+Your public key has been saved in /c/Users/sslap81/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:vqzPr50KQN/jCrp3AcJRyFz0jp7XyvDUwSU0VEUZcUE petchimuthu100@mail.com
+The key's randomart image is:
++---[RSA 2048]----+
+| o =+  .+..o==E. |
+|  =  . . .  ..   |
+| . .. . . .      |
+|  o..+ o o       |
+|   .o.o S        |
+|   . o.= o       |
+|    = +.=        |
+|   ..B.* o .     |
+|  oo .*oB++      |
++----[SHA256]-----+
+
+sslap81@SSLAP0081 MINGW64 ~/.ssh
+$ cd Homestead
+bash: cd: Homestead: No such file or directory
+
+sslap81@SSLAP0081 MINGW64 ~/.ssh
+$ cd ..
+
+sslap81@SSLAP0081 MINGW64 ~
+$ cd homestead
+
+sslap81@SSLAP0081 MINGW64 ~/homestead ((v6.1.0))
+$ vagrant up
+Bringing machine 'homestead-7' up with 'virtualbox' provider...
+==> homestead-7: Importing base box 'laravel/homestead'...
+==> homestead-7: Matching MAC address for NAT networking...
+==> homestead-7: Checking if box 'laravel/homestead' is up to date...
+==> homestead-7: Setting the name of the VM: homestead-7
+==> homestead-7: Clearing any previously set network interfaces...
+==> homestead-7: Preparing network interfaces based on configuration...
+    homestead-7: Adapter 1: nat
+    homestead-7: Adapter 2: hostonly
+==> homestead-7: Forwarding ports...
+    homestead-7: 80 (guest) => 8000 (host) (adapter 1)
+    homestead-7: 443 (guest) => 44300 (host) (adapter 1)
+    homestead-7: 3306 (guest) => 33060 (host) (adapter 1)
+    homestead-7: 5432 (guest) => 54320 (host) (adapter 1)
+    homestead-7: 8025 (guest) => 8025 (host) (adapter 1)
+    homestead-7: 27017 (guest) => 27017 (host) (adapter 1)
+    homestead-7: 22 (guest) => 2222 (host) (adapter 1)
+==> homestead-7: Running 'pre-boot' VM customizations...
+==> homestead-7: Booting VM...
+==> homestead-7: Waiting for machine to boot. This may take a few minutes...
+    homestead-7: SSH address: 127.0.0.1:2222
+    homestead-7: SSH username: vagrant
+    homestead-7: SSH auth method: private key
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Remote connection disconnect. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Remote connection disconnect. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Connection aborted. Retrying...
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7:
+    homestead-7: Vagrant insecure key detected. Vagrant will automatically repla
+ce
+    homestead-7: this with a newly generated keypair for better security.
+    homestead-7:
+    homestead-7: Inserting generated public key within guest...
+    homestead-7: Removing insecure key from the guest if it's present...
+    homestead-7: Key inserted! Disconnecting and reconnecting using new SSH key.
+..
+==> homestead-7: Machine booted and ready!
+==> homestead-7: Checking for guest additions in VM...
+    homestead-7: The guest additions on this VM do not match the installed versi
+on of
+    homestead-7: VirtualBox! In most cases this is fine, but in rare cases it ca
+n
+    homestead-7: prevent things such as shared folders from working properly. If
+ you see
+    homestead-7: shared folder errors, please make sure the guest additions with
+in the
+    homestead-7: virtual machine match the version of VirtualBox you have instal
+led on
+    homestead-7: your host and reload your VM.
+    homestead-7:
+    homestead-7: Guest Additions Version: 5.0.18_Ubuntu r106667
+    homestead-7: VirtualBox Version: 5.1
+==> homestead-7: Setting hostname...
+==> homestead-7: Configuring and enabling network interfaces...
+==> homestead-7: Mounting shared folders...
+    homestead-7: /vagrant => C:/Users/sslap81/Homestead
+==> homestead-7: Running provisioner: file...
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: inline script
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: inline script
+==> homestead-7:
+==> homestead-7: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3m1T2I7oqDGGiFHz2UI+dQxV
+FFIwKcLYtLaCE+Z95wMzi79snyZYZGM8XDuWxMuRkyxyNtvvDXbJ0zmRmrzvT91R6fMGYDYz++hyun7b
+Xz10ASfZMX5ZmW6r7LB1M5UL7SxPiZKVNYZd3jYcCcm3dD1rFKNkTmJQHw1XYCvZzLmBtSF0L2Vq1nSG
+cxWCuN42HAOH918ru9QJmjvGOAU3TnXsuI+e2feqKwFrTnP6mPGEGLvuQQHbrNykjZqKUAdTqBOTwdVz
+s57r9aMvSusd5Rjdwg+j+F+PB+9fqzGbnSe5qgv6RULs/MOO+rv/e4F9Zz4Z0tErm4uASI53hdak9 pe
+tchimuthu100@mail.com
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: inline script
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: inline script
+==> homestead-7: Unable to mount one of your folders. Please check your folders
+in Homestead.yaml
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: C:/Users/sslap81/AppData/Local/Temp/vagrant-shell20171
+205-116-1wourhp.sh
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Creating Certificate: homestead.app
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Creating Site: homestead.app
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Checking for old Schedule
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Restarting Nginx
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Creating MySQL Database: homestead
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Creating Postgres Database: homestead
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Clear Variables
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: script: Update Composer
+==> homestead-7: Updating to version 1.5.5 (stable channel).
+==> homestead-7:
+==> homestead-7: Downloading (connecting...)
+==> homestead-7:
+==> homestead-7: Downloading (100%)
+==> homestead-7:
+==> homestead-7:
+==> homestead-7: Use composer self-update --rollback to return to version 1.5.3
+==> homestead-7: Running provisioner: shell...
+    homestead-7: Running: C:/Users/sslap81/AppData/Local/Temp/vagrant-shell20171
+205-116-73o2x0.sh
+
+sslap81@SSLAP0081 MINGW64 ~/homestead ((v6.1.0))
+$

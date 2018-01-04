@@ -1,0 +1,2 @@
+connection: svn
+https://192.168.1.15:8443/svn/TeamManagement/TeamNov2017/shoppingCart/home

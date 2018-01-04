@@ -1,0 +1,214 @@
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (master)
+$ git pull
+gitadmin@192.168.1.35's password:
+remote: Counting objects: 259, done.
+remote: Compressing objects: 100% (238/238), done.
+Receiving obremote: Total 259 (delta 162), reused 20 (delta 5)
+Receiving objects: 100% (259/259), 562.21 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (162/162), completed with 42 local objects.
+From ssh://192.168.1.35/home/gitadmin/repo/sajala
+   b495e1c..f7edf22  master         -> origin/master
+ * [new branch]      ajay171208     -> origin/ajay171208
+ * [new branch]      kasthuri_171205_Accountantscreen -> origin/kasthuri_171205_Accountantscreen
+ * [new branch]      kumaran_171209 -> origin/kumaran_171209
+ * [new branch]      rajesh1208     -> origin/rajesh1208
+ * [new branch]      sabari171207   -> origin/sabari171207
+Updating b495e1c..f7edf22
+Fast-forward
+ .../alterquery_m_signup.txt => 171211.txt}         |    12 +
+ .../alterquery_t_lessiontest.txt                   |     5 -
+ .../alter_query_2017_11_13/alterquery_m_user.txt   |     1 -
+ Dumb&Queries/Dumb/Study&Practise/m_writing.sql     |   157 +
+ .../Dumb/Study&Practise/t_possibilities.sql        |   196 +
+ Dumb&Queries/Dumb/m_loginlog.sql                   |    37 +
+ Dumb&Queries/Dumb/m_userrole_type.sql              |   132 +
+ Dumb&Queries/Dumb/m_usertype.sql                   |    47 +
+ Dumb&Queries/TotalDumb/jptrainingdb.sql            | 11761 +++++++++++++++++++
+ app/Exceptions/Handler.php                         |    95 +-
+ app/Http/Controllers/AccountantController.php      |    34 +
+ app/Http/Controllers/HiraganaController.php        |    40 +-
+ app/Http/Controllers/LearningController.php        |    17 +-
+ app/Http/Controllers/LessonsController.php         |    13 +-
+ app/Http/Controllers/QuestionDetailsController.php |    74 +
+ app/Model/Accountant.php                           |   102 +
+ app/Model/Hiragana.php                             |    17 +-
+ app/Model/Learning.php                             |     2 +-
+ app/Model/LessonModel.php                          |     2 +-
+ app/Model/Question.php                             |   135 +
+ public/css/common.css                              |    25 +-
+ public/css/lesson.css                              |    29 +
+ public/images/scheduleView.png                     |   Bin 0 -> 1173 bytes
+ public/images/userimage.png                        |   Bin 0 -> 4419 bytes
+ public/js/eckana.js                                |     7 +
+ public/js/hiragana.js                              |    30 +-
+ public/js/home.js                                  |     4 +
+ public/js/lessons.js                               |    69 +-
+ public/js/question.js                              |    34 +
+ .../img/{B0001 => B0117}/L001/L0016Q001.jpg        |   Bin
+ .../img/{B0001 => B0117}/L001/L0016Q002.jpeg       |   Bin
+ .../img/{B0001 => B0117}/L001/L0016Q003.jpg        |   Bin
+ .../img/{B0001 => B0117}/L001/L0016Q004.png        |   Bin
+ .../questions/img/{B0001 => B0117}/L001/gif.gif    |   Bin
+ .../img/B0117/L001/\343\201\204\343\201\210.gif"   |   Bin
+ resources/lang/en/messages.php                     |    48 +-
+ resources/lang/jp/messages.php                     |    28 +-
+ resources/views/Accountant/index.blade.php         |   200 +
+ resources/views/common/resultpagepopup.blade.php   |     4 +-
+ resources/views/hiragana/examtypepopup.blade.php   |    15 +-
+ resources/views/hiragana/hiraganapopup.blade.php   |    51 +-
+ resources/views/home/home.blade.php                |     7 +
+ resources/views/learning/index.blade.php           |    20 +-
+ resources/views/lessons/exampopup.blade.php        |    27 +-
+ resources/views/lessons/finalresult.blade.php      |    42 +-
+ .../views/lessons/generateexampopup.blade.php      |     8 +-
+ resources/views/lessons/helppopup.blade.php        |    26 +-
+ resources/views/lessons/index.blade.php            |    20 +-
+ resources/views/lessons/kotabaexampopup.blade.php  |    24 +-
+ resources/views/lessons/viewlesson.blade.php       |    80 +-
+ resources/views/question/index.blade.php           |   144 +
+ routes/web.php                                     |    11 +-
+ 52 files changed, 13622 insertions(+), 210 deletions(-)
+ rename Dumb&Queries/Alterquery/{alter_query_2017_12_06/alterquery_m_signup.txt => 171211.txt} (85%)
+ delete mode 100644 Dumb&Queries/Alterquery/alter_query_2017_11_08/alterquery_t_lessiontest.txt
+ delete mode 100644 Dumb&Queries/Alterquery/alter_query_2017_11_13/alterquery_m_user.txt
+ create mode 100644 Dumb&Queries/Dumb/Study&Practise/m_writing.sql
+ create mode 100644 Dumb&Queries/Dumb/Study&Practise/t_possibilities.sql
+ create mode 100644 Dumb&Queries/Dumb/m_loginlog.sql
+ create mode 100644 Dumb&Queries/Dumb/m_userrole_type.sql
+ create mode 100644 Dumb&Queries/Dumb/m_usertype.sql
+ create mode 100644 Dumb&Queries/TotalDumb/jptrainingdb.sql
+ create mode 100644 app/Http/Controllers/AccountantController.php
+ create mode 100644 app/Http/Controllers/QuestionDetailsController.php
+ create mode 100644 app/Model/Accountant.php
+ create mode 100644 app/Model/Question.php
+ create mode 100644 public/css/lesson.css
+ create mode 100644 public/images/scheduleView.png
+ create mode 100644 public/images/userimage.png
+ create mode 100644 public/js/question.js
+ rename public/upload/books/questions/img/{B0001 => B0117}/L001/L0016Q001.jpg (100%)
+ rename public/upload/books/questions/img/{B0001 => B0117}/L001/L0016Q002.jpeg (100%)
+ rename public/upload/books/questions/img/{B0001 => B0117}/L001/L0016Q003.jpg (100%)
+ rename public/upload/books/questions/img/{B0001 => B0117}/L001/L0016Q004.png (100%)
+ rename public/upload/books/questions/img/{B0001 => B0117}/L001/gif.gif (100%)
+ rename "public/upload/books/questions/img/B0001/L001/\343\201\204\343\201\210.gif" => "public/upload/books/questions/img/B0117/L001/\343\201\204\343\201\210.gif" (100%)
+ create mode 100644 resources/views/Accountant/index.blade.php
+ create mode 100644 resources/views/question/index.blade.php
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (master)
+$ git remote set-url origin ssh://gitadmin@192.168.1.35/home/gitadmin/repo/sajala.git^C
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (master)
+$ git pull
+gitadmin@192.168.1.35's password:
+remote: Counting objects: 14, done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 14 (delta 9), reused 0 (delta 0)
+Unpacking objects: 100% (14/14), done.
+From ssh://192.168.1.35/home/gitadmin/repo/sajala
+   f7edf22..fef69da  master     -> origin/master
+Updating f7edf22..fef69da
+Fast-forward
+ Dumb&Queries/Dumb/Study&Practise/m_grouplist.sql   | 113 +++++++++++++++++++++
+ Dumb&Queries/TotalDumb/jptrainingdb.sql            | 100 +++++++++++++++++-
+ app/Http/Controllers/QuestionDetailsController.php |   1 +
+ 3 files changed, 213 insertions(+), 1 deletion(-)
+ create mode 100644 Dumb&Queries/Dumb/Study&Practise/m_grouplist.sql
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (master)
+$ git checkout -b theo20171211
+Switched to a new branch 'theo20171211'
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git status
+On branch theo20171211
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   app/Http/Controllers/LessonsController.php
+        modified:   resources/lang/en/messages.php
+        modified:   resources/lang/jp/messages.php
+        modified:   resources/views/lessons/finalresult.blade.php
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        storage/error_20171206/
+        storage/error_20171208/
+        storage/error_20171211/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git status
+On branch theo20171211
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   app/Http/Controllers/LessonsController.php
+        modified:   resources/lang/en/messages.php
+        modified:   resources/lang/jp/messages.php
+        modified:   resources/views/lessons/finalresult.blade.php
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git add .
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git commit -m "changes by Theo in result page"
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'sslap81@SSLAP0081.(none)')
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git config --global user.email "theobros05@gmail.com"
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git config --global user.name "Theo"
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git commit -m "changes by Theo in result page"
+[theo20171211 3ed7efc] changes by Theo in result page
+ 4 files changed, 42 insertions(+), 26 deletions(-)
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git push origin
+fatal: The current branch theo20171211 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin theo20171211
+
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git push origin theo20171211
+ssh: connect to host 192.168.1.35 port 22: No route to host
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$ git push origin theo20171211
+gitadmin@192.168.1.35's password:
+Counting objects: 156, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (80/80), done.
+Writing objects: 100% (156/156), 535.45 KiB | 0 bytes/s, done.
+Total 156 (delta 97), reused 109 (delta 67)
+To ssh://192.168.1.35/home/gitadmin/repo/sajala.git
+ * [new branch]      theo20171211 -> theo20171211
+
+sslap81@SSLAP0081 MINGW64 ~/microbit/sajala (theo20171211)
+$
